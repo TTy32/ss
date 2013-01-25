@@ -20,10 +20,11 @@ ss stores specific (non-user config) in a file called ".ss_vars", in the same di
 ## Incremental backups
 
 I used rsync's --link-dest option to facilitate this requirement by creating hard links. Using hard links, all the incremental backups are transparent as seen from the user, and minimal space is used.
+All previous snapshots are passed to rsync's --link-dest option to create hardlinks whenever possible.
 
 ## Fast recovery from failure
 
-Not being able to (easily) retrieve backups in case of system failure defeats the purpose of creating backups in the first place. rsync's --link-dest option takes care of this already, to create transparent snapshots.
+Not being able to (easily) retrieve backups in case of system failure defeats the purpose of creating backups in the first place. rsync's --link-dest option takes care of this already, to create transparent snapshots. This includes the possibility to just delete snapshots on the destination, hard links make this operation transparent.
 
 
 # Installation
