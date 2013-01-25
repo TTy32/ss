@@ -96,8 +96,14 @@ function incremental {
 	# Increment last snapshot number
 	SNAPSHOT_INCREMENT=`expr $CONFIG_AUTO_LAST_SNAPSHOT + 1`
 
+	# Build --link-dest for all previous backups
+	for (( i=0; i<=$CONFIG_AUTO_LAST_SNAPSHOT; i++ ))
+	do
+		LINKDEST+="--link-dest=../$i "
+	done
+
 	# Transfer incremental backup
-	rsync -v $OPT --link-dest=../$CONFIG_AUTO_LAST_SNAPSHOT $SRC $DST/$SNAPSHOT_INCREMENT | tee rsync_stdout.temp
+	rsync -v $OPT $LINKDEST $SRC $DST/$SNAPSHOT_INCREMENT | tee rsync_stdout.temp
 
 	# Transfer snapshot info for this snapshot
 	touch info.temp

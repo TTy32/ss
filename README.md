@@ -34,7 +34,7 @@ Copy the ss bash script somewhere in your $PATH, or add it's location to your (u
 
 ## ss 
 
-ss without any options displays all the command line options.
+ss without any options displays all the available command line options.
 
 ## ss createconfig
 
@@ -50,7 +50,7 @@ Create the first initial backup. This option also creates a file __.ss_vars__ us
 
 ## ss incremental
 
-Create snapshot.
+Create snapshot. If the backup process is interrupted and __ss incremental is run again__, the previous interrupted backup on the destination will be overwritten.
 
 # Dependencies
 
