@@ -35,7 +35,7 @@ function list {
 	set -e
 	for (( i=0; i<=$CONFIG_AUTO_LAST_SNAPSHOT; i++ ))
 	{
-		rsync $OPT $DST/$i/snapshot.info info.temp
+		rsync $DST/$i/snapshot.info info.temp
 		echo -e -n "$i:\n" >> $PWD/list.ss
 		cat info.temp >> $PWD/list.ss
 		rm info.temp
