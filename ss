@@ -104,7 +104,7 @@ function incremental {
 
 	# Transfer incremental backup
 	rsync -v $OPT $LINKDEST $SRC $DST/$SNAPSHOT_INCREMENT | tee rsync_stdout.temp
-
+	
 	# Transfer snapshot info for this snapshot
 	touch info.temp
 	echo "Date of this snapshot: `date`" >> info.temp
