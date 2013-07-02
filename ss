@@ -66,7 +66,7 @@ function initial {
 	echo -n "Total size: " >> info.temp
 		cat rsync_stdout.temp | sed -nr "s/total size is ([a-zA-Z0-9\.]+) .*/\1/p" >> info.temp # Total size
 	#echo "" >> info.temp
-	rsync $OPT info.temp $DST/0/snapshot.info
+	rsync info.temp $DST/0/snapshot.info
 	rm rsync_stdout.temp 
 	rm info.temp
 
@@ -116,7 +116,7 @@ function incremental {
 	echo -n "Total size: " >> info.temp
 		cat rsync_stdout.temp | sed -nr "s/total size is ([a-zA-Z0-9\.]+) .*/\1/p" >> info.temp # Total size
 	#echo "" >> info.temp
-	rsync $OPT info.temp $DST/$SNAPSHOT_INCREMENT/snapshot.info
+	rsync info.temp $DST/$SNAPSHOT_INCREMENT/snapshot.info
 	rm rsync_stdout.temp 
 	rm info.temp
 
