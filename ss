@@ -26,7 +26,7 @@ function list {
 	# Load config
 	source $PWD/.ss_config
 
-	# Load backup vars
+	# Load vars
 	source $PWD/.ss_vars
 
 	# Retrieve snapshot info's
@@ -41,6 +41,27 @@ function list {
 		rm info.temp
 		echo "" >> $PWD/list.ss
 	}
+	echo ""
+	echo "===================="
+	echo "ss: list.ss created."
+}
+
+function lastsnapshot {
+	echo "ss: Retrieving last snapshot info..."
+
+	# Load config
+	source $PWD/.ss_config
+
+	# Load vars
+	source $PWD/.ss_vars
+
+	# Retrieve last snapshot
+	set +e
+	rm $PWD/lastsnapshot.ss 2>/dev/null
+	set -e
+
+	rsync $DST/$CONFIG_AUTO_LAST_SNAPSHOT/snapshot.info lastsnapshot.ss
+
 	echo ""
 	echo "===================="
 	echo "ss: list.ss created."
@@ -90,7 +111,7 @@ function incremental {
 	# Load config
 	source $PWD/.ss_config
 
-	# Load backup vars
+	# Load vars
 	source $PWD/.ss_vars
 
 	# Increment last snapshot number
@@ -137,6 +158,7 @@ function incremental {
 case "$1" in
 	createconfig) createconfig ;;
 	list) list ;;
+	lastsnapshot) lastsnapshot ;;
 	initial) initial ;;
 	incremental) incremental ;;
 
@@ -144,7 +166,8 @@ case "$1" in
 	echo -e "\nUsage: ss <parameter>\n"
 	echo "Unrecognised parameter. Please provide one of the following parameters:"
 	echo "    createconfig   Create initial config file (.ss_config)"
-	echo "    list           List all the remote snapshots and their dates"
+	echo "    list           List all the remote snapshots"
+	echo "    lastsnapshot   List the last taken remote snapshot"
 	echo "    initial        Create initial backup (full backup)"
 	echo "    incremental    Create incremental backup"
 	echo ""
