@@ -184,7 +184,7 @@ function incremental {
 	SNAPSHOT_INCREMENT=`expr $CONFIG_AUTO_LAST_SNAPSHOT + 1`
 
 	# Start snapshot number
-	START_SNAPSHOT=`expr $CONFIG_AUTO_LAST_SNAPSHOT - 19`
+	START_SNAPSHOT=`expr $SNAPSHOT_INCREMENT - 19`
     if (( $START_SNAPSHOT < 0 )); then
 		START_SNAPSHOT=0
 	fi
